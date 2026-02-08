@@ -63,7 +63,6 @@ export default function CustomContextMenu(props) {
       setShow(false)
     }
 
-    window.addEventListener('contextmenu', handleContextMenu)
     window.addEventListener('click', handleClick)
 
     return () => {
