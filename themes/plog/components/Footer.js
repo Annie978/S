@@ -1,20 +1,57 @@
-import Vercel from '@/components/Vercel'
+import { BeiAnGongAn } from '@/components/BeiAnGongAn'
+import DarkModeButton from '@/components/DarkModeButton'
 import { siteConfig } from '@/lib/config'
 
-export const Footer = (props) => {
-  const d = new Date()
-  const currentYear = d.getFullYear()
+export const Footer = props => {
+const d = new Date()
+const currentYear = d.getFullYear()
+const since = siteConfig('SINCE')
+const copyrightDate =
+parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
 
-  const since = siteConfig('SINCE')
-  const copyrightDate = parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
+return (
+<footer className='z-10 relative w-full bg-white px-6 border-t dark:border-hexo-black-gray dark:bg-hexo-black-gray '>
+<DarkModeButton className='text-center pt-4' />
 
-  return <footer className={'z-10 relative mt-6 flex-shrink-0 m-auto w-full text-gray-500 dark:text-gray-400 transition-all' } >
-     <div className="my-4 text-sm leading-6">
-       <div className="flex align-baseline justify-start flex-wrap space-x-6">
-         <div> © {siteConfig('AUTHOR')} {copyrightDate}  </div>
-         <div>Powered By <a href="https://github.com/tangly1024/NotionNext" className='underline'>NotionNext {siteConfig('VERSION')}</a></div>
-         <Vercel />
-       </div>
-     </div>
-   </footer>
+```
+  <div className='container mx-auto max-w-4xl py-6 md:flex flex-wrap md:flex-no-wrap md:justify-between items-center text-sm'>
+    {/* 👇 简洁图标+数字 */}
+    <div className='text-center mb-3 md:mb-0 text-xs text-gray-500 dark:text-gray-400'>
+      <span className="busuanzi_container_site_pv">
+        👁️‍🗨️<span className="busuanzi_value_site_pv">0</span>
+      </span>
+      &nbsp;&nbsp;
+      <span className="busuanzi_container_site_uv">
+        🖤<span className="busuanzi_value_site_uv">0</span>
+      </span>
+      <script async src="<https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js>"></script>
+    </div>
+
+    <div className='text-center'>
+      &copy;{`${copyrightDate}`} {siteConfig('AUTHOR')}. All rights
+      reserved.
+    </div>
+    <div className='md:p-0 text-center md:text-right text-xs'>
+      {siteConfig('BEI_AN') && (
+        <a
+          href={siteConfig('BEI_AN_LINK')}
+          className='text-black dark:text-gray-200 no-underline hover:underline ml-4'>
+          {siteConfig('BEI_AN')}
+        </a>
+      )}
+      <BeiAnGongAn />
+      <span className='dark:text-gray-200 no-underline ml-4'>
+        Powered by
+        <a
+          href='<https://www.google.com>'
+          className=' hover:underline'>
+          NotionNext {siteConfig('VERSION')}
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+```
+
+)
 }
